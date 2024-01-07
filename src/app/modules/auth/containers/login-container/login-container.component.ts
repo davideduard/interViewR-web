@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
+interface LoginResponse {
+	token: string;
+}
+
+
 @Component({
 	selector: 'app-login-container',
 	template: ` <app-login (loginRequested)="onLogin($event)"></app-login> `,
@@ -10,14 +15,6 @@ export class LoginContainer {
 	constructor(private authService: AuthService) {}
 	onLogin(credentials: { username: string; password: string }) {
 		this.authService
-			.login(credentials.username, credentials.password)
-			.subscribe(response => {
-				console.log(this.authService.isLoggedIn());
-				if (response.success) {
-					console.log('logged in');
-				} else {
-					console.log('wrong');
-				}
-			});
+			.login(credentials.username, credentials.password);
 	}
 }
