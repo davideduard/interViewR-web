@@ -29,6 +29,12 @@ module.exports = {
         clicked: '#444444',
         darker: '#3b3b3b',
         darkest: '#333333'
+      },
+      'white' : {
+        DEFAULT: '#FFFFFF'
+      },
+      'transparent': {
+        DEFAULT: 'transparent'
       }
     },
     extend: {},

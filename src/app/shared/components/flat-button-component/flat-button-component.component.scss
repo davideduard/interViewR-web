@@ -1,0 +1,7 @@
+::ng-deep .mdc-button--unelevated {
+  @apply w-full #{!important};
+}
+
+::ng-deep .mat-mdc-unelevated-button:not(:disabled) {
+  @apply text-white bg-secondary rounded-2xl font-bold text-sm #{!important}
+}
