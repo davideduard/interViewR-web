@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 			<div question class="text-sm font-bold">
 				<p class="text-accent-lightest opacity-60">
 					Already have an account?
-					<a class="text-primary cursor-pointer" [routerLink]="['/login']"
+					<a class="text-primary cursor-pointer" [routerLink]="['../login']"
 						>Click here</a
 					>
 				</p>

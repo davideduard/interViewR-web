@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
-interface LoginResponse {
-	token: string;
-}
-
+import { LoginResponse } from '../../interfaces';
 
 @Component({
 	selector: 'app-login-container',
@@ -12,9 +9,22 @@ interface LoginResponse {
 	styleUrls: ['./login-container.component.scss']
 })
 export class LoginContainer {
-	constructor(private authService: AuthService) {}
-	onLogin(credentials: { username: string; password: string }) {
-		this.authService
-			.login(credentials.username, credentials.password);
+	constructor(
+		private authService: AuthService,
+		private router: Router
+	) {}
+	onLogin(credentials: { email: string; password: string }) {
+		this.authService.login(credentials.email, credentials.password).subscribe(
+			(response: LoginResponse) => {
+				if (response.token) {
+					const token = response.token;
+					localStorage.setItem('auth-token', token);
+					this.router.navigate(['/']);
+				}
+			},
+			error => {
+				console.log('err');
+			}
+		);
 	}
 }

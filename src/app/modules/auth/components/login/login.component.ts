@@ -6,9 +6,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 		<div form class="flex flex-col items-center gap-2">
 			<div class="w-[550px] pt-10">
 				<app-text-field
-					[(ngModel)]="username"
-					name="username"
-					label="username"
+					[(ngModel)]="email"
+					name="email"
+					label="email"
 				></app-text-field>
 				<app-text-field
 					[(ngModel)]="password"
@@ -30,7 +30,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 		<div question class="text-sm font-bold">
 			<p class="text-accent-lightest opacity-60">
 				Don't have an account?
-				<a class="text-primary cursor-pointer" [routerLink]="['/register']"
+				<a class="text-primary cursor-pointer" [routerLink]="['../register']"
 					>Click here</a
 				>
 			</p>
@@ -39,17 +39,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-	username: string = '';
+	email: string = '';
 	password: string = '';
 
 	@Output() loginRequested = new EventEmitter<{
-		username: string;
+		email: string;
 		password: string;
 	}>();
 
 	onLogin() {
 		this.loginRequested.emit({
-			username: this.username,
+			email: this.email,
 			password: this.password
 		});
 	}

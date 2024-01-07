@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginContainer, RegisterContainer } from './containers';
+import { authGuard } from '../../guards';
 
 const routes: Routes = [
 	{
@@ -10,11 +11,6 @@ const routes: Routes = [
 	{
 		path: 'register',
 		component: RegisterContainer
-	},
-	{
-		path: '',
-		redirectTo: '/login',
-		pathMatch: 'full'
 	}
 ];
 
