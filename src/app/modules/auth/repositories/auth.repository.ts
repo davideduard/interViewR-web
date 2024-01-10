@@ -7,7 +7,7 @@ import { LoginResponse } from '../interfaces';
 	providedIn: 'root'
 })
 export class AuthRepository {
-	private apiUrl: string = 'http://localhost:8080/api/auth';
+	private apiUrl: string = 'https://interviewr-be.onrender.com/api/auth';
 
 	constructor(private httpClient: HttpClient) {}
 
