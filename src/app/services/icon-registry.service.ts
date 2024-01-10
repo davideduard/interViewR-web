@@ -56,5 +56,10 @@ export class IconRegistryService {
 				'/assets/icons/google.svg'
 			)
 		);
+
+		this.matIconRegistry.addSvgIcon(
+			'send',
+			this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/icons/send.svg')
+		);
 	}
 }

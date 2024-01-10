@@ -31,7 +31,8 @@ module.exports = {
         darkest: '#333333'
       },
       'white' : {
-        DEFAULT: '#FFFFFF'
+        DEFAULT: '#FFFFFF',
+        darker: '#f5f5f5'
       },
       'transparent': {
         DEFAULT: 'transparent'
