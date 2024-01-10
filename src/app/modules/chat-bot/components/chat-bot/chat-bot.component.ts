@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
 	selector: 'app-chat-bot',
@@ -10,15 +10,37 @@ import { Component, Input } from '@angular/core';
 				<div class="self-end pr-6 text-accent-darkest font-bold text-sm">
 					{{ minutes }} m {{ seconds }} s left
 				</div>
-				<div class="h-[85%] bg-white rounded-xl">
+				<div class="h-[85%] bg-white rounded-xl pt-14 overflow-auto pb-10">
 					<div
-						class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-xl text-accent text-opacity-40"
+						class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-xl text-accent text-opacity-40 text-center"
 						*ngIf="!started"
 					>
-						Say “hello” to start the conversation
+						Say “Hello, Eduard!” or greet the person to start the conversation
+					</div>
+					<div
+						class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-xl text-accent text-opacity-40"
+						*ngIf="ended"
+					>
+						TIME'S UP!
+					</div>
+					<div *ngIf="started && !ended">
+						<ng-content></ng-content>
 					</div>
 				</div>
-				<div class="h-[5%] bg-white rounded-xl"></div>
+				<div class="h-[5%] bg-white rounded-xl flex flex-row pr-4">
+					<input
+						type="text"
+						class="w-full h-full rounded-xl pl-5 focus:outline-none"
+						placeholder="Type your message here..."
+						[(ngModel)]="currentMessage"
+						(keyup.enter)="onEnter()"
+					/>
+					<img
+						src="/assets/icons/send.svg"
+						class="scale-[0.7] hover:cursor-pointer"
+						(click)="onEnter()"
+					/>
+				</div>
 			</div>
 		</div>
 	`,
@@ -28,4 +50,16 @@ export class ChatBotComponent {
 	@Input() minutes: number = 15;
 	@Input() seconds: number = 0;
 	@Input() started: boolean = false;
+	@Input() ended: boolean = false;
+
+	@Output() chatMessage: EventEmitter<string> = new EventEmitter<string>();
+
+	currentMessage: string = '';
+
+	onEnter(): void {
+		if (this.currentMessage.trim() != '') {
+			this.chatMessage.emit(this.currentMessage);
+			this.currentMessage = '';
+		}
+	}
 }
