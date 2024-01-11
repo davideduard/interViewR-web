@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { LoginResponse } from '../interfaces';
+import { LoginResponse, RegisterResponse } from '../interfaces';
+import { RegisterRequest } from '../types';
+
 
 @Injectable({
 	providedIn: 'root'
@@ -22,4 +24,12 @@ export class AuthRepository {
 	isLoggedIn(): boolean {
 		return localStorage.getItem('auth-token') !== null;
 	}
+
+  register(firstName: string, lastName: string, email: string, password: string): Observable<RegisterResponse> {
+    const requestData : RegisterRequest = {firstName, lastName, email, password};
+    return this.httpClient.post<RegisterResponse>(
+      `${this.apiUrl}/signup`,
+      requestData
+    )
+  }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthRepository } from '../repositories/auth.repository';
-import { LoginResponse } from '../interfaces';
+import { LoginResponse, RegisterResponse } from '../interfaces';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,5 +15,14 @@ export class AuthService {
 
 	isLoggedIn(): boolean {
 		return this.authRepository.isLoggedIn();
+	}
+
+	register(
+		firstName: string,
+		lastName: string,
+		email: string,
+		password: string
+	): Observable<RegisterResponse> {
+		return this.authRepository.register(firstName, lastName, email, password);
 	}
 }

@@ -47,7 +47,7 @@ export class LoginComponent {
 		password: string;
 	}>();
 
-	onLogin() {
+	onLogin(): void {
 		this.loginRequested.emit({
 			email: this.email,
 			password: this.password
