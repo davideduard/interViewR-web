@@ -15,7 +15,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 						class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-xl text-accent text-opacity-40 text-center"
 						*ngIf="!started"
 					>
-						Say “Hello, Eduard!” or greet the person to start the conversation
+						Say “Hello” or greet the person to start the conversation
 					</div>
 					<div
 						class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-xl text-accent text-opacity-40"

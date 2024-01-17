@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatBotService } from '../../services';
+import { ChatResponse } from '../../types/chat-response';
 
 @Component({
 	selector: 'app-chat-bot-container',
@@ -13,7 +15,7 @@ import { Component, OnInit } from '@angular/core';
 			<div
 				*ngFor="let message of messages; index as i"
 				[ngClass]="{ 'bg-white-darker': i % 2 == 1 }"
-				class="w-full h-14 flex items-center gap-4 text-left pl-10"
+				class="w-full flex gap-4 text-left pl-10 pt-3 pb-3 h-auto"
 			>
 				<div
 					class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold"
@@ -21,7 +23,9 @@ import { Component, OnInit } from '@angular/core';
 				>
 					{{ i % 2 == 0 ? nameInitial : botInitial }}
 				</div>
-				{{ message }}
+				<div class="pt-1 w-full text-justify pr-8">
+					{{ message }}
+				</div>
 			</div>
 		</app-chat-bot>
 	`,
@@ -36,12 +40,14 @@ export class ChatBotContainer implements OnInit {
 	nameInitial: string = 'ED';
 	botInitial: string = 'C';
 	private intervalId: any;
+	private messageId: number;
 
-	constructor() {
+	constructor(private chatBotService: ChatBotService) {
 		this.minutes = 15;
 		this.seconds = 0;
 		this.started = false;
 		this.ended = false;
+		this.messageId = -1;
 	}
 	ngOnInit(): void {}
 
@@ -72,7 +78,12 @@ export class ChatBotContainer implements OnInit {
 			this.startTimer();
 		}
 		this.messages.push(message);
-		console.log(message);
+		this.chatBotService
+			.requestChat(message, this.messageId)
+			.subscribe((response: ChatResponse) => {
+				this.messages.push(response.message);
+				this.messageId = response.chatId;
+			});
 	}
 
 	ngOnDestroy(): void {
