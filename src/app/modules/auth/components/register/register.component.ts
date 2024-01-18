@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RegisterRequest } from '../../types';
 
 @Component({
@@ -26,7 +26,11 @@ import { RegisterRequest } from '../../types';
 				</div>
 
 				<div class="w-44 pt-2">
-					<app-flat-button-component (click)="onRegister()" label="Sign Up">
+					<app-flat-button-component
+						(click)="onRegister()"
+						label="Sign Up"
+						[isLoading]="isLoading"
+					>
 					</app-flat-button-component>
 				</div>
 			</div>
@@ -47,6 +51,8 @@ export class RegisterComponent {
 	lastName: string = '';
 	email: string = '';
 	password: string = '';
+
+	@Input() isLoading: boolean = false;
 
 	@Output() registerRequested = new EventEmitter<RegisterRequest>();
 

@@ -21,6 +21,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 				<app-flat-button-component
 					(click)="onLogin()"
 					label="Continue"
+					[isLoading]="isLoading"
 				></app-flat-button-component>
 			</div>
 			<p class="text-primary text-xs cursor-pointer font-bold pt-1">
@@ -41,6 +42,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class LoginComponent {
 	email: string = '';
 	password: string = '';
+
+	@Input() isLoading = false;
 
 	@Output() loginRequested = new EventEmitter<{
 		email: string;

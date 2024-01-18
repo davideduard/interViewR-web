@@ -15,13 +15,23 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 						class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-xl text-accent text-opacity-40 text-center"
 						*ngIf="!started"
 					>
-						Say “Hello” or greet the person to start the conversation
+						Say “Hello, let's start the interview” or greet the person to start
+						the conversation
 					</div>
 					<div
 						class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-xl text-accent text-opacity-40"
 						*ngIf="ended"
 					>
-						TIME'S UP!
+						<div
+							class="self-center text-center animate-pulse"
+							*ngIf="isLoading"
+						>
+							Your results are loading...
+						</div>
+
+						<div class="self-center text-center" *ngIf="!isLoading">
+							Time's up!
+						</div>
 					</div>
 					<div *ngIf="started && !ended">
 						<ng-content></ng-content>
@@ -34,6 +44,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 						placeholder="Type your message here..."
 						[(ngModel)]="currentMessage"
 						(keyup.enter)="onEnter()"
+						[disabled]="ended || isGenerating"
 					/>
 					<img
 						src="/assets/icons/send.svg"
@@ -51,6 +62,8 @@ export class ChatBotComponent {
 	@Input() seconds: number = 0;
 	@Input() started: boolean = false;
 	@Input() ended: boolean = false;
+	@Input() isLoading: boolean = false;
+	@Input() isGenerating: boolean = false;
 
 	@Output() chatMessage: EventEmitter<string> = new EventEmitter<string>();
 

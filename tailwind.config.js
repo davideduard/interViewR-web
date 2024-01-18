@@ -1,4 +1,5 @@
-/** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
+
 module.exports = {
   content: ["./src/**/*.{html,js,ts}"],
   theme: {
@@ -40,5 +41,20 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin(({ matchUtilities, theme }) => {
+    matchUtilities(
+      {
+        "animation-delay": (value) => {
+          return {
+            "animation-delay": value,
+          };
+        },
+      },
+      {
+        values: theme("transitionDelay"),
+      }
+    );
+  }),
+  ],
 }
