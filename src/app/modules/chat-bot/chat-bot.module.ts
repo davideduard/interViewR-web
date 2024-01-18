@@ -8,6 +8,7 @@ import * as fromContainers from './containers';
 import { TextFieldComponent } from '../../shared/components';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
 	declarations: [...fromComponents.components, ...fromContainers.containers],
@@ -16,7 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
 		ChatBotRoutingModule,
 		TextFieldComponent,
 		FormsModule,
-		MatIconModule
+		MatIconModule,
+		MatDialogModule
 	]
 })
 export class ChatBotModule {}
